@@ -23,14 +23,17 @@ async function login(event) {
         body: JSON.stringify({ user })
     }).then(response => response.json())
 
+    //se existir um response.message significa que o usuário errou, portanto mostramos a mensagem ao erro
     if(response.message){
         alert(response.message)
         window.location.reload()
         return
     }
 
+    //se o usuário acertar, guardamos no sessionStorage o id e nome
     const { id, name } = response
 
+    //JSON.stringify converte o objeto em json
     sessionStorage.setItem("user", JSON.stringify({ id, name }))
     alert("Login realizado com sucesso!")
 

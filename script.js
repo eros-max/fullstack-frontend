@@ -2,6 +2,7 @@ const header = document.querySelector("header ul")
 
 function init() {
 
+    // converte o JSON para objeto e guarda na variável user
     const user = JSON.parse(sessionStorage.getItem("user"))
 
     if(user){
@@ -9,7 +10,11 @@ function init() {
         <li>Usuário: ${user.name}</li>
         <li><button id ="logout">Sair</button></li>
         `
-        
+
+        // adicionar o evento ao botão apenas se o usuário estiver logado
+        const logoutButton = document.querySelector("#logout")
+        logoutButton.addEventListener("click", logout)
+
         return
     }
     
@@ -21,3 +26,9 @@ function init() {
 }
 
 init()
+
+function logout(){
+    sessionStorage.removeItem("user")
+    alert("Você deslogou. Até mais. Volte mais vezes!")
+    window.location.reload()
+}
